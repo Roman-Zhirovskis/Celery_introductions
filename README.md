@@ -1,2 +1,4 @@
-# YT-Django-Celery-Series-Intro-Install-Run-Task
- 
+# Django-Celery 
+ 1-celery-worker
+ 2-celery-beat
+ 3-celery result

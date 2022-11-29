@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app1'
+    'app1',
+    'task2',
+    'task3',
+    'django_celery_beat',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +123,59 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Email sending
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'buckosky@yandex.ru'
+EMAIL_HOST_PASSWORD = '89ELules89'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# CELERY_BEAT_SCHEDULE = {
+#     "scheduled_task": {
+#         "task": "app1.tasks.add",
+#         "schedule": 5.0,
+#         "args": (10, 10),
+    # },
+#     "database": {
+#         "task": "task3.tasks.bkup",
+#         "schedule": 5.0,
+#     },
+# }
+
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_CACHE_BACKEND = 'default'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'cachedb',
+    }
+}
+
+# def show_toolbar(request):
+#     return True
+
+# if DEBUG:
+#     MIDDLEWARE += [
+#         'debug_toolbar.middleware.DebugToolbarMiddleware',
+#     ]
+#     INSTALLED_APPS += [
+#         'debug_toolbar',
+#     ]
+#     INTERNAL_IPS = ['127.0.0.1', ]
+
+#     # this is the main reason for not showing up the toolbar
+#     import mimetypes
+
+#     mimetypes.add_type("application/javascript", ".js", True)
+
+#     DEBUG_TOOLBAR_CONFIG = {
+#         'INTERCEPT_REDIRECTS': False,
+#         "SHOW_TOOLBAR_CALLBACK": show_toolbar,
+#         'INSERT_BEFORE': ''
+#     }
